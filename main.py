@@ -18,7 +18,7 @@ URL_WEBSITE = 'https://www.google.com.br'
 URL_PROXIES = ['https://github.com/a2u/free-proxy-list/raw/master/free-proxy-list.txt']
 FILE_PROXIES = 'proxies.txt'
 
-DB_HOST = 'localhost'
+DB_HOST = '35.232.134.49'
 DB_USERNAME = 'root'
 DB_PASSWORD ='12345'
 DB_DATABASE = 'proxies'
