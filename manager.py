@@ -20,7 +20,7 @@ class Manager:
 	##
 	##
 	def add(self):
-		print('STARTING TO BENCHMARK PROXIES...\n')
+		print('TRYING TO ADD NEW PROXIES...\n')
 		
 		posProcessed = 1
 	
@@ -29,7 +29,7 @@ class Manager:
 		posEnd = len(ips)
 
 		if posEnd == 0:
-			print('No new proxy to be added!')
+			print('No new proxy to be added!\n\n')
 			return None
 
 		threadList = []
@@ -68,6 +68,7 @@ class Manager:
 			print('{} proxies failed...'.format(len(proxiesFailed)))
 			for proxy in proxiesFailed:			
 				self.db.deleteProxy(proxy)
+		print('FINISHED ADDING NEW PROXIES...\n\n')
 	def update(self, speed = None):
 
 		ips = list(self.db.getExistingProxies())
@@ -76,7 +77,7 @@ class Manager:
 	
 		posEnd = len(ips) 
 
-		print("Updating proxies from database...")
+		print("UPDATING PROXIES FROM DATABASE...\n")
 
 		threadList = []
 		threadId = 1
@@ -118,6 +119,7 @@ class Manager:
 			print('{} proxies failed and were removed...'.format(len(proxiesFailed)))
 			for proxy in proxiesFailed:			
 				self.db.deleteProxy(proxy)
+		print("FINISHED UPDATING PROXIES FROM DATABASE...\n\n")
 
 	##
 	## @brief      removes the slower proxies above the speed. 
@@ -145,7 +147,7 @@ class Manager:
 
 		posEnd = len(ips)
 
-		print("{} were seen so far, retrying to add them...".format(posEnd))
+		print("{} were seen so far, retrying to add them...\n".format(posEnd))
 
 
 		if posEnd == 0:
@@ -188,6 +190,7 @@ class Manager:
 			print('{} proxies failed...'.format(len(proxiesFailed)))
 			for proxy in proxiesFailed:			
 				self.db.deleteProxy(proxy)
+		print("FINISHED RETRY..\n\n")
 
 	
 	##

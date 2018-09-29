@@ -1,10 +1,32 @@
 import sys
+import time
+import datetime
+
+
 from manager import Manager
 
 
-if __name__ == "__main__":
+HOUR_IN_SECONDS = 60*60
 
+TIME_SCHEDULER = True
+
+SCHEDULER_TIMING = {'add' : HOUR_IN_SECONDS, 'update' : HOUR_IN_SECONDS + HOUR_IN_SECONDS/2, 'retry' : HOUR_IN_SECONDS*1.80 + HOUR_IN_SECONDS/2}
+
+
+def main():
 	manager = Manager()
+
+	if TIME_SCHEDULER:
+		nextScheduler = None
+		while True:
+			if nextScheduler == None or nextScheduler < datetime.datetime.now():
+				manager.add()
+				manager.update()
+				manager.reTry()
+				nextScheduler = datetime.datetime.now() + datetime.timedelta(seconds=HOUR_IN_SECONDS)
+				print('[{}]Finished current schedule...'.format(datetime.datetime.now()))
+				print('next schedule is => [{}]'.format(nextScheduler))
+		return None
 	args = sys.argv
 
 	# running without args. Default is to get the list of proxies and add to the database.
@@ -32,3 +54,6 @@ if __name__ == "__main__":
 	# will retry to add all the seen proxies so far.
 	elif args[1] == 'retry':
 		manager.reTry()
+
+if __name__ == "__main__":
+	main()
